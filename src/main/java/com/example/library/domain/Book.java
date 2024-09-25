@@ -41,6 +41,8 @@ public class Book {
     private int publishDate;
 
 
+    private Category category;
+
 
 
 }

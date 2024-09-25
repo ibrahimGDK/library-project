@@ -1,10 +1,9 @@
 package com.example.library.domain;
 
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -21,5 +20,11 @@ public class Author {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Size(min = 4,max = 70,message = "Your name '${validatedValue}' must be between {min} and {max} chars long ")
+    @NotNull(message = "Please provide your name")
+    @Column(length = 70, nullable = false)
+    private String name;
 
+    @Column(nullable = false)
+    private boolean builtIn = false;
 }
