@@ -7,6 +7,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
@@ -41,7 +43,32 @@ public class Book {
     private int publishDate;
 
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "categoryId",nullable = false)
     private Category category;
+
+    @Column(nullable = true)
+    private String imageUrl;
+
+
+    @Column(nullable = false)
+    private boolean loanable = true;
+
+    @Column(nullable = false,length = 6)
+    private String shelfCode;
+
+    @Column(nullable = false)
+    private boolean active = true;
+
+    @Column(nullable = false)
+    private boolean featured = false;
+
+    @Column(nullable = false)
+    private LocalDateTime createDate = LocalDateTime.now();
+
+    @Column(nullable = false)
+    private boolean builtIn = false;
+
 
 
 
