@@ -47,4 +47,5 @@ public class Loan {
     private LoanStatus status = LoanStatus.LOAN_ACTIVE;
 
 
+
 }
