@@ -8,10 +8,7 @@ import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/author")
@@ -29,6 +26,13 @@ public class AuthorController {
             authorService.createAuthor(authorDTO);
             SfResponse response = new SfResponse(ResponseMessage.BOOK_SAVED_RESPONSE_MESSAGE,true);
             return new ResponseEntity<>(response, HttpStatus.CREATED);
+    }
+
+    @GetMapping("/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<AuthorDTO> getAuthorById(@PathVariable Long id){
+        AuthorDTO authorDTO = authorService.getAuthorById(id);
+        return ResponseEntity.ok(authorDTO);
     }
 
 }

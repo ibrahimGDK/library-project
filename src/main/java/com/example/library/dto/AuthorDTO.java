@@ -11,12 +11,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class AuthorDTO {
 
-    private Long id;
 
     @NotBlank(message = "Name is required")
     @Size(min = 4, max = 70, message = "Name must be between 4 and 70 characters")
     private String name;
 
-    private Boolean builtIn= false;
 
 }

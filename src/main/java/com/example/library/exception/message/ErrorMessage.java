@@ -8,5 +8,6 @@ public class ErrorMessage {
     public final static String ROLE_NOT_FOUND_EXCEPTION = "Role : %s not found";
 
     public final static String USER_NOT_FOUND_EXCEPTION = "User with email: %s not found";
+    public final static String AUTHOR_NOT_FOUND_EXCEPTION = "Author with id %s not found";
 
 }
