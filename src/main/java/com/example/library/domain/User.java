@@ -17,6 +17,7 @@ import java.util.Set;
 @Setter
 
 @Entity
+@Table(name = "t_user")
 public class User {
 
     @Id
@@ -68,9 +69,9 @@ public class User {
 
 
     @ManyToMany
-    @JoinTable(name = "t_userRoles",
-            joinColumns = @JoinColumn(name = "roleId"),
-            inverseJoinColumns = @JoinColumn(name = "userId"))
+    @JoinTable(name = "t_user_roles",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles = new HashSet<>();
 
 

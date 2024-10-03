@@ -9,5 +9,6 @@ public class ErrorMessage {
 
     public final static String USER_NOT_FOUND_EXCEPTION = "User with email: %s not found";
     public final static String AUTHOR_NOT_FOUND_EXCEPTION = "Author with id %s not found";
+    public final static String NOT_PERMITTED_METHOD_MESSAGE = "You don't have any permission to change this data";
 
 }

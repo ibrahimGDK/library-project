@@ -1,6 +1,7 @@
 package com.example.library.controller;
 
 import com.example.library.dto.AuthorDTO;
+import com.example.library.dto.request.AuthorUpdateRequest;
 import com.example.library.dto.response.ResponseMessage;
 import com.example.library.dto.response.SfResponse;
 import com.example.library.service.AuthorService;
@@ -11,7 +12,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/author")
+@RequestMapping("/authors")
 public class AuthorController {
 
     private final AuthorService authorService;
@@ -24,7 +25,7 @@ public class AuthorController {
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<SfResponse> createAuthor(@RequestBody @Valid AuthorDTO authorDTO){
             authorService.createAuthor(authorDTO);
-            SfResponse response = new SfResponse(ResponseMessage.BOOK_SAVED_RESPONSE_MESSAGE,true);
+            SfResponse response = new SfResponse(ResponseMessage.AUTHOR_SAVED_RESPONSE_MESSAGE,true);
             return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 
@@ -33,6 +34,15 @@ public class AuthorController {
     public ResponseEntity<AuthorDTO> getAuthorById(@PathVariable Long id){
         AuthorDTO authorDTO = authorService.getAuthorById(id);
         return ResponseEntity.ok(authorDTO);
+    }
+
+
+    @PutMapping("/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<SfResponse> updateAuthor (@Valid @RequestBody AuthorUpdateRequest authorUpdateRequest, @PathVariable Long id){
+        authorService.updateAuthor(authorUpdateRequest,id);
+        SfResponse response = new SfResponse(ResponseMessage.AUTHOR_UPDATED_RESPONSE_MESSAGE,true);
+        return new ResponseEntity<>(response,HttpStatus.OK);
     }
 
 }

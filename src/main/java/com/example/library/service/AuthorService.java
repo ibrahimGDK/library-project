@@ -2,6 +2,8 @@ package com.example.library.service;
 
 import com.example.library.domain.Author;
 import com.example.library.dto.AuthorDTO;
+import com.example.library.dto.request.AuthorUpdateRequest;
+import com.example.library.exception.BadRequestException;
 import com.example.library.exception.ResourceNotFoundException;
 import com.example.library.exception.message.ErrorMessage;
 import com.example.library.mapper.AuthorMapper;
@@ -29,5 +31,19 @@ public class AuthorService{
         Author author = authorRepository.findById(id).orElseThrow(
                 ()-> new ResourceNotFoundException(String.format(ErrorMessage.AUTHOR_NOT_FOUND_EXCEPTION,id)));
         return authorMapper.authorToAuthorDTO(author);
+    }
+
+    public void updateAuthor(AuthorUpdateRequest authorUpdateRequest, Long id) {
+
+        Author author = authorRepository.findById(id).orElseThrow(
+                ()->new ResourceNotFoundException(String.format(ErrorMessage.AUTHOR_NOT_FOUND_EXCEPTION,id)));
+
+        if (author.isBuiltIn()){
+            throw new BadRequestException(String.format(ErrorMessage.NOT_PERMITTED_METHOD_MESSAGE));
+        }
+
+        author.setName(authorUpdateRequest.getName());
+
+        authorRepository.save(author);
     }
 }
