@@ -9,6 +9,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
@@ -27,4 +30,7 @@ public class Author {
 
     @Column(nullable = false)
     private boolean builtIn = false;
+
+    @OneToMany(mappedBy = "author")
+    private List<Book> bookList = new ArrayList<>();
 }
