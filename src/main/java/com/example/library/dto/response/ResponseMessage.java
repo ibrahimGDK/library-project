@@ -7,6 +7,7 @@ public class ResponseMessage {
     public final static String REGISTER_RESPONSE_MESSAGE = "Registration Successfully Done";
     public static final String AUTHOR_UPDATED_RESPONSE_MESSAGE = "Author successfully updated";
     public static final String AUTHOR_DELETED_RESPONSE_MESSAGE = "Author successfully deleted";
+    public static final String PUBLISHER_SAVED_RESPONSE_MESSAGE = "Publisher successfully saved";
 
 
 }
