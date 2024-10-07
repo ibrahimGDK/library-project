@@ -2,6 +2,7 @@ package com.example.library.controller;
 
 
 import com.example.library.dto.PublisherDTO;
+import com.example.library.dto.request.PublisherUpdateRequest;
 import com.example.library.dto.response.PublisherResponseDTO;
 import com.example.library.service.PublisherService;
 import jakarta.validation.Valid;
@@ -37,6 +38,13 @@ public class PublisherController {
         return ResponseEntity.ok(response);
     }
 
+    @PutMapping("/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<PublisherResponseDTO> updatePublisher(@RequestBody @Valid PublisherUpdateRequest publisherUpdateRequest, @PathVariable Long id){
 
+        PublisherResponseDTO response = publisherService.updatePublisher(publisherUpdateRequest,id);
+
+        return ResponseEntity.ok(response);
+    }
 
 }

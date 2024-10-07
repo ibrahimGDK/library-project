@@ -2,8 +2,10 @@ package com.example.library.service;
 
 import com.example.library.domain.Publisher;
 import com.example.library.dto.PublisherDTO;
+import com.example.library.dto.request.PublisherUpdateRequest;
 import com.example.library.dto.response.PublisherResponseDTO;
 import com.example.library.dto.response.ResponseMessage;
+import com.example.library.exception.BadRequestException;
 import com.example.library.exception.ConflictException;
 import com.example.library.exception.ResourceNotFoundException;
 import com.example.library.exception.message.ErrorMessage;
@@ -60,5 +62,23 @@ public class PublisherService {
         return response;
     }
 
+
+    public PublisherResponseDTO updatePublisher(PublisherUpdateRequest publisherUpdateRequest, Long id) {
+        Publisher publisher = getPublisher(id);
+
+        if (publisherUpdateRequest.isBuiltIn()){
+            throw new BadRequestException(String.format(ErrorMessage.NOT_PERMITTED_METHOD_MESSAGE));
+        }
+
+
+        publisher.setName(publisherUpdateRequest.getName());
+        publisher.setBuiltIn(publisherUpdateRequest.isBuiltIn());
+
+        publisherRepository.save(publisher);
+
+        PublisherResponseDTO publisherResponseDTO= publisherMapper.PublisherUpdateRequestToPublisherResponseDto(publisherUpdateRequest);
+        publisherResponseDTO.setMessage(String.format(ResponseMessage.AUTHOR_UPDATED_RESPONSE_MESSAGE));
+        return publisherResponseDTO;
+    }
 
 }
