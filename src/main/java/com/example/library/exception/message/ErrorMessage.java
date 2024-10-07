@@ -13,4 +13,5 @@ public class ErrorMessage {
 
     public static final String AUTHOR_HAS_RELATED_BOOKS_MESSAGE = "Author has related records in books";
     public static final String PUBLSIHER_ALREADY_EXIST_MESSAGE = "Publisher %s already exist";
+    public static final String PUBLISHER_NOT_FOUND_MESSAGE = "Publisher with id %s not found";
 }
